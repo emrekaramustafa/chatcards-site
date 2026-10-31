@@ -10,6 +10,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
   <meta name="theme-color" content="#06070F">
+  <meta name="apple-itunes-app" content="app-id=6814486063">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="ChatCards">
   <meta property="og:title" content="ChatCards — Sohbetin kartlara sığar">
@@ -42,9 +43,9 @@
         <p class="eyebrow">Grup ve iki kişilik sohbet analizi</p>
         <h1>Sohbetin <span class="gradient-text">kartlara sığar.</span></h1>
         <p class="lede">Kim grubun gevezesi, kim herkes uyurken yazıyor, kimin tek mesajı bir bölüm uzunluğunda? ChatCards sohbet dışa aktarımını telefonunda analiz eder ve paylaşmak isteyeceğin kartlara dönüştürür.</p>
-        <div class="actions">
-          <span class="button" aria-disabled="true">App Store <span class="sub">· yakında</span></span>
-          <span class="button secondary" aria-disabled="true">Google Play <span class="sub">· yakında</span></span>
+        <div class="actions store-badges">
+          <a class="store-badge" data-store="ios" href="https://apps.apple.com/app/id6814486063"><img src="img/badges/app-store-en.svg" width="144" height="48" alt="App Store'dan indir"></a>
+          <a class="store-badge" data-store="android" href="https://play.google.com/store/apps/details?id=app.chatpoz.chatpoz"><img src="img/badges/google-play-tr.png" width="162" height="48" alt="Google Play'den indir"></a>
         </div>
         <p class="fine">Reklam yok. Mesajlar cihazından çıkmaz. WhatsApp ve Meta ile bağlantılı değildir.</p>
       </div>
@@ -118,13 +119,13 @@
             <div class="price-box">
               <article class="plan recommended">
                 <div class="plan-name">Yıllık <span class="tag">Önerilen</span></div>
-                <div class="price">599,99 TL <small>/ yıl</small></div>
-                <p class="price-note">Aylık karşılığı 50 TL</p>
+                <div class="price">300 TL <small>/ yıl</small></div>
+                <p class="price-note">Aylık karşılığı 25 TL</p>
                 <p class="price-copy">Uygun yeni abonelere mağaza tarafından 3 gün ücretsiz deneme sunulur.</p>
               </article>
               <article class="plan">
                 <div class="plan-name">Aylık</div>
-                <div class="price">199,99 TL <small>/ ay</small></div>
+                <div class="price">50 TL <small>/ ay</small></div>
                 <p class="price-note">Esnek plan</p>
                 <p class="price-copy">Bağlayıcı fiyat, para birimi ve vergiler satın alma onayından önce App Store veya Google Play tarafından gösterilir.</p>
               </article>
@@ -139,5 +140,11 @@
     <span>© 2026 Mek Mobile Tech</span>
     <div class="footer-links"><a href="about/">Hakkımızda</a><a href="support/">Destek</a><a href="privacy/">Gizlilik</a><a href="terms/">Kullanım koşulları</a><a href="subscription-terms/">Abonelik koşulları</a></div>
   </footer>
+  <script type="module">
+    // Rozetler kampanya parametresiyle mağazaya gider; v1.0 uygulamasının
+    // paylaşım linkindeki utm_* değerleri de aktarılır (SITE-03, SITE-04).
+    import { mount } from './assets/go.js';
+    mount({ page: 'home', mode: 'badges', defaults: { c: 'web' } });
+  </script>
 </body>
 </html>

@@ -28,6 +28,8 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidd
 body {
   margin: 0;
   min-width: 320px;
+  /* Kısa sayfalarda (/go/, /k/) arka plan gradyanı tekrar etmesin. */
+  min-height: 100vh;
   background:
     radial-gradient(52rem 34rem at 6% -8%, rgba(91, 255, 165, .13), transparent 62%),
     radial-gradient(50rem 36rem at 96% 2%, rgba(155, 107, 255, .16), transparent 60%),
@@ -83,6 +85,12 @@ h3 { font-size: 1.22rem; }
 .button.secondary { color: var(--ink); background: transparent; border: 1px solid var(--line-strong); }
 .button[aria-disabled="true"] { cursor: default; opacity: .96; }
 .button .sub { font-weight: 600; opacity: .72; font-size: .82rem; }
+
+/* Mağaza rozetleri: Apple ve Google'ın resmî görselleri, değiştirilmeden. */
+.store-badges { align-items: center; gap: 14px; }
+.store-badge { display: inline-flex; border-radius: 10px; text-decoration: none; transition: transform .15s ease; }
+.store-badge:hover { transform: translateY(-1px); }
+.store-badge img { height: 52px; width: auto; }
 
 /* Hero */
 .hero { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 56px; padding: 60px 0 76px; }
@@ -159,6 +167,35 @@ code { padding: 2px 6px; border-radius: 6px; background: rgba(255,255,255,.08); 
 .legal table { width: 100%; border-collapse: collapse; margin: 20px 0; }
 .legal th, .legal td { padding: 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
 .legal a { color: var(--turquoise); }
+
+/* /go/ ve /k/ iniş sayfaları. go.js <html>'e data-platform yazar; JS yoksa
+   her şey görünür (rozetler yedek olarak çalışır). */
+[hidden] { display: none !important; }
+html[data-platform="ios"] [data-show]:not([data-show~="ios"]),
+html[data-platform="android"] [data-show]:not([data-show~="android"]),
+html[data-platform="desktop"] [data-show]:not([data-show~="desktop"]) { display: none !important; }
+.nav-compact { min-height: 64px; }
+.landing { width: min(calc(100% - 40px), 680px); margin: 0 auto; padding: 56px 0 72px; text-align: center; }
+.landing h1 { font-size: clamp(1.9rem, 7.2vw, 3.1rem); }
+.landing .lede { margin: 18px auto 28px; }
+.landing .actions { justify-content: center; }
+.landing-actions { flex-direction: column; align-items: center; }
+.landing-badges { margin-top: 8px; }
+.landing-hint { margin: -10px 0 22px; color: var(--ink); font-weight: 600; }
+.landing-steps { margin: 44px auto 0; max-width: 420px; text-align: left; }
+.landing-steps .eyebrow { text-align: center; font-size: .76rem; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.steps li { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(150deg, rgba(255,255,255,.05), rgba(255,255,255,.012)); color: var(--muted); }
+.steps li strong { color: var(--ink); }
+.steps .num { flex: none; width: 32px; height: 32px; margin: 0; font-size: .9rem; }
+.steps li:nth-child(2) .num { background: var(--turquoise); }
+.steps li:nth-child(3) .num { background: var(--purple); color: var(--ink); }
+.landing-privacy { margin: 26px 0 0; color: var(--green); font-weight: 600; font-size: .92rem; }
+.button.big { width: 100%; max-width: 380px; min-height: 60px; font-size: 1.1rem; }
+.qr-box { display: none; margin: 34px auto 0; justify-items: center; gap: 12px; color: var(--muted); font-size: .92rem; }
+.qr-code { width: 192px; height: 192px; padding: 16px; border-radius: 18px; background: #fff; }
+.qr-code svg { display: block; width: 100%; height: 100%; }
+@media (min-width: 900px) { .qr-box.ready { display: grid; } }
 
 /* Alt bilgi */
 .footer { display: flex; justify-content: space-between; gap: 30px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: .92rem; }

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Grubunun ödül töreni hazır · ChatCards</title>
+  <meta name="title-tr" content="Grubunun ödül töreni hazır · ChatCards">
+  <meta name="title-en" content="Your group chat's awards night · ChatCards">
+  <meta name="robots" content="noindex, follow">
+  <meta name="description" content="ChatCards: WhatsApp sohbetini telefonunda analiz et, grubunun ödül kartlarını paylaş.">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../styles.css">
+  <meta name="theme-color" content="#06070F">
+  <meta name="apple-itunes-app" content="app-id=6814486063">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ChatCards">
+  <meta property="og:title" content="ChatCards">
+  <meta property="og:description" content="Sohbetini telefonunda analiz et, grubunun kartlarını paylaş. İlk analiz ücretsiz.">
+  <meta property="og:image" content="https://emrekaramustafa.github.io/chatcards-site/img/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+  <!-- Reklam, creator, bio ve basın linklerinin tek giriş noktası (03a SITE-05).
+       Parametre sözlüğü: docs/growth/links.md. Mobil tarayıcıda mağazaya
+       kendiliğinden geçer; uygulama içi tarayıcıda tek büyük düğme gösterir;
+       masaüstünde rozetler ve QR. -->
+  <header class="shell nav nav-compact">
+    <a class="brand" href="../"><img src="../favicon.svg" alt=""><span>Chat<span class="c2">Cards</span></span></a>
+  </header>
+
+  <main class="landing">
+    <div data-lang="tr">
+      <h1>Grubunun <span class="gradient-text">ödül töreni hazır.</span></h1>
+      <p class="lede">Kim geveze, kim hep geç yazar, kim sohbeti taşıyor? Sohbetini dışa aktar, kartların saniyeler içinde çıksın.</p>
+      <p class="landing-hint" data-show="desktop" hidden data-unhide>Telefonunla QR'ı okut ya da mağaza rozetine tıkla.</p>
+    </div>
+    <div data-lang="en" hidden>
+      <h1>Your group chat's <span class="gradient-text">awards night.</span></h1>
+      <p class="lede">Who's the Yapper, who always replies last, who carries the chat? Export your chat and get your cards in seconds.</p>
+      <p class="landing-hint" data-show="desktop" hidden data-unhide>Scan the QR with your phone or tap a store badge.</p>
+    </div>
+
+    <div class="actions landing-actions">
+      <a class="button big" data-store="ios" data-show="ios" href="https://apps.apple.com/app/id6814486063">
+        <span data-lang="tr">App Store'da aç</span><span data-lang="en" hidden>Open in the App Store</span>
+      </a>
+      <a class="button big" data-store="android" data-show="android" href="https://play.google.com/store/apps/details?id=app.chatpoz.chatpoz">
+        <span data-lang="tr">Google Play'de aç</span><span data-lang="en" hidden>Open in Google Play</span>
+      </a>
+    </div>
+
+    <div class="actions store-badges landing-badges" data-show="desktop">
+      <a class="store-badge" data-store="ios" href="https://apps.apple.com/app/id6814486063"><img src="../img/badges/app-store-en.svg" width="144" height="48" alt="App Store'dan indir" data-alt-en="Download on the App Store" data-alt-tr="App Store'dan indir"></a>
+      <a class="store-badge" data-store="android" href="https://play.google.com/store/apps/details?id=app.chatpoz.chatpoz"><img src="../img/badges/google-play-tr.png" width="162" height="48" alt="Google Play'den indir" data-src-tr="../img/badges/google-play-tr.png" data-src-en="../img/badges/google-play-en.png" data-alt-tr="Google Play'den indir" data-alt-en="Get it on Google Play"></a>
+    </div>
+
+    <figure class="qr-box" data-qr>
+      <div class="qr-code" data-qr-code></div>
+      <figcaption><span data-lang="tr">Telefonunun kamerasıyla okut</span><span data-lang="en" hidden>Scan with your phone's camera</span></figcaption>
+    </figure>
+
+    <p class="fine">
+      <span data-lang="tr">İlk analiz ücretsiz · Mesajların telefonundan çıkmaz · Hesap yok · Reklam yok</span>
+      <span data-lang="en" hidden>First analysis free · Messages never leave your phone · No account · No ads</span>
+    </p>
+  </main>
+
+  <footer class="shell footer">
+    <span>© 2026 Mek Mobile Tech</span>
+    <div class="footer-links"><a href="../support/">Destek / Support</a><a href="../privacy/">Gizlilik / Privacy</a></div>
+  </footer>
+  <script type="module">
+    import { mount } from '../assets/go.js';
+    mount({ page: 'go', mode: 'redirect', bilingual: true });
+  </script>
+</body>
+</html>
