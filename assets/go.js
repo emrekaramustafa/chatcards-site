@@ -201,11 +201,70 @@ export function detectInAppBrowser(userAgent = '') {
   return null;
 }
 
-/** `l` parametresi, yoksa tarayıcının ilk dili: Türkçe (ve `az`) → tr, diğerleri → en. */
-export function pickLanguage(param, languages = []) {
-  if (param === 'tr' || param === 'en') return param;
-  const first = String((languages && languages[0]) || '').toLowerCase();
-  return first.startsWith('tr') || first.startsWith('az') ? 'tr' : 'en';
+/** Sitenin dilleri ve her dilin ana sayfası (site köküne göre, göreli). */
+export const SITE_LANGUAGES = ['tr', 'en', 'pt', 'hi'];
+export const LANDING_PATHS = { tr: '', en: 'en/', pt: 'pt/', hi: 'hi/' };
+
+/** Bir BCP 47 dil etiketinin site dili: tr/az → tr, pt-* → pt, hi → hi, gerisi en. */
+export function siteLanguage(tag) {
+  const value = String(tag || '').toLowerCase();
+  if (value.startsWith('tr') || value.startsWith('az')) return 'tr';
+  if (value.startsWith('pt')) return 'pt';
+  // Uygulamayla aynı eşleme: yalnızca `hi` Hintçe; en-IN ve diğer Hint
+  // dilleri İngilizce.
+  if (value === 'hi' || value.startsWith('hi-')) return 'hi';
+  return 'en';
+}
+
+/**
+ * `l` parametresi, yoksa tarayıcının ilk dili. [supported] dışındaki bir
+ * sonuç İngilizceye düşer (ör. yalnızca TR/EN metni olan bir sayfa).
+ */
+export function pickLanguage(param, languages = [], supported = SITE_LANGUAGES) {
+  const allowed = supported && supported.length ? supported : SITE_LANGUAGES;
+  if (allowed.includes(param)) return param;
+  const lang = siteLanguage(languages && languages[0]);
+  return allowed.includes(lang) ? lang : 'en';
+}
+
+/** Arama motoru ve önizleme botları: dil yönlendirmesi yapılmaz. */
+const BOT_PATTERN = /bot|crawl|spider|slurp|facebookexternalhit|embedly|lighthouse/i;
+
+/**
+ * Kök sayfadan (TR, `x-default`) tarayıcı diline uygun ana sayfaya geçiş.
+ * Hedef, kampanya parametreleri kaybolmasın diye sorgu dizgesi ve çapayla
+ * birlikte göreli adres olarak döner (ör. `en/?utm_source=…`); geçiş
+ * gerekmiyorsa `null`.
+ *
+ * Geçiş yapılmayan durumlar: `l` parametresi var (kullanıcı dili seçti, ör.
+ * dil bağlantısı `../?l=tr`), ziyaretçi sitenin içinden geliyor (aynı host),
+ * tarayıcı dili sayfanın dili, ya da ziyaretçi bir bot. Çerez ve tarayıcı
+ * deposu kullanılmaz.
+ */
+export function languageRedirect({
+  pageLang = 'tr',
+  search = '',
+  hash = '',
+  languages = [],
+  referrer = '',
+  href = '',
+  userAgent = '',
+} = {}) {
+  const query = new URLSearchParams(search);
+  if (clean(query.get('l'))) return null;
+  if (BOT_PATTERN.test(String(userAgent))) return null;
+  if (referrer && href) {
+    try {
+      if (new URL(referrer).host === new URL(href).host) return null;
+    } catch (_) {
+      // Bozuk referrer: dış ziyaret sayılır.
+    }
+  }
+  const lang = pickLanguage('', languages);
+  if (lang === pageLang) return null;
+  const target = LANDING_PATHS[lang];
+  if (target === undefined) return null;
+  return `${target || './'}${search || ''}${hash || ''}`;
 }
 
 /**
@@ -220,6 +279,7 @@ export function resolve({
   defaults = {},
   mode = 'redirect',
   config = CONFIG,
+  languagesSupported = SITE_LANGUAGES,
 } = {}) {
   const params = readParams(search, defaults);
   const platform = detectPlatform(userAgent, maxTouchPoints);
@@ -232,7 +292,7 @@ export function resolve({
     params,
     platform,
     inApp,
-    lang: pickLanguage(params.l, languages),
+    lang: pickLanguage(params.l, languages, languagesSupported),
     ct: campaignToken(params),
     iosUrl,
     androidUrl,
@@ -369,13 +429,18 @@ export async function renderQr(doc, href) {
  *
  * Sayfa işaretleri:
  *   `data-store="ios|android|auto"` → `href` mağaza adresi olur
- *   `data-lang="tr|en"`             → yalnızca seçilen dil görünür (`bilingual`)
+ *   `data-lang="tr|en|pt|hi"`       → yalnızca seçilen dil görünür (`bilingual`)
+ *
+ * [pageLang] verilirse (yalnızca kök TR sayfası) ziyaretçi tarayıcı diline
+ * uygun ana sayfaya, parametreleri korunarak geçirilir (`languageRedirect`).
  */
 export function mount({
   page = '',
   defaults = {},
   mode = 'redirect',
   bilingual = false,
+  languagesSupported = SITE_LANGUAGES,
+  pageLang = '',
   config = CONFIG,
   doc = globalThis.document,
   win = globalThis.window,
@@ -383,6 +448,24 @@ export function mount({
   const nav = win.navigator || {};
   const languages =
     nav.languages && nav.languages.length ? nav.languages : [nav.language || ''];
+
+  if (pageLang) {
+    const target = languageRedirect({
+      pageLang,
+      search: win.location.search,
+      hash: win.location.hash,
+      languages,
+      referrer: doc.referrer,
+      href: win.location.href,
+      userAgent: nav.userAgent || '',
+    });
+    if (target) {
+      // Sayaç ve rozetler hedef sayfada çalışır; burada yalnızca geçiş.
+      win.location.replace(target);
+      return { redirectedTo: target };
+    }
+  }
+
   const result = resolve({
     search: win.location.search,
     userAgent: nav.userAgent || '',
@@ -391,6 +474,7 @@ export function mount({
     defaults,
     mode,
     config,
+    languagesSupported,
   });
 
   const root = doc.documentElement;
@@ -407,10 +491,12 @@ export function mount({
     }
     const title = doc.querySelector(`meta[name="title-${result.lang}"]`);
     if (title) doc.title = title.content;
-    // Dile göre rozet görseli: `data-src-tr`/`data-src-en`, `data-alt-tr`/`data-alt-en`.
-    for (const img of doc.querySelectorAll(`img[data-src-${result.lang}]`)) {
-      img.src = img.getAttribute(`data-src-${result.lang}`);
-      const alt = img.getAttribute(`data-alt-${result.lang}`);
+    // Dile göre rozet görseli ve alt metni (`data-src-<dil>`, `data-alt-<dil>`).
+    // O dilin görseli yoksa İngilizce rozet kullanılır.
+    for (const img of doc.querySelectorAll('img[data-src-en], img[data-alt-en]')) {
+      const src = img.getAttribute(`data-src-${result.lang}`) || img.getAttribute('data-src-en');
+      if (src) img.src = src;
+      const alt = img.getAttribute(`data-alt-${result.lang}`) || img.getAttribute('data-alt-en');
       if (alt) img.alt = alt;
     }
   }

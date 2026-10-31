@@ -197,6 +197,38 @@ html[data-platform="desktop"] [data-show]:not([data-show~="desktop"]) { display:
 .qr-code svg { display: block; width: 100%; height: 100%; }
 @media (min-width: 900px) { .qr-box.ready { display: grid; } }
 
+/* Dil seçici (TR · EN · PT · HI) */
+.lang-switch { display: inline-flex; gap: 4px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; }
+.lang-switch a { padding: 3px 9px; border-radius: 999px; font-size: .78rem; font-weight: 700; letter-spacing: .04em; color: var(--muted); text-decoration: none; }
+.lang-switch a[aria-current="true"] { background: rgba(255,255,255,.1); color: var(--ink); }
+.trust { margin-top: 18px; color: var(--green); font-weight: 600; font-size: .92rem; }
+:lang(hi) h1, :lang(hi) h2, :lang(hi) h3 { letter-spacing: 0; line-height: 1.3; }
+:lang(hi) .eyebrow { letter-spacing: .04em; }
+
+.shots.two { grid-template-columns: repeat(2, 1fr); max-width: 760px; margin-left: auto; margin-right: auto; }
+@media (max-width: 900px) { .shots.two { grid-template-columns: 1fr; } }
+.plan .plan-price { margin: 14px 0 6px; font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+
+/* SSS: her soru bir çapa (uygulamadan derin bağlantı) */
+.faq-list { display: grid; gap: 12px; margin-top: 30px; }
+.faq-item { border: 1px solid var(--line); border-radius: 18px; background: var(--surface); scroll-margin-top: 24px; }
+.faq-item summary { cursor: pointer; padding: 18px 20px; font-weight: 700; color: var(--ink); list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; float: right; color: var(--green); font-weight: 800; }
+.faq-item[open] summary::after { content: "–"; }
+.faq-item .answer { padding: 0 20px 18px; }
+.faq-item .answer p { margin: 0 0 10px; }
+.faq-item:target { border-color: rgba(91,255,165,.6); }
+.legal .codes td:first-child { white-space: nowrap; font-family: ui-monospace, Menlo, monospace; color: var(--ink); }
+.legal .table-wrap { overflow-x: auto; }
+
+/* Basın sayfası */
+.press-box { padding: 20px 22px; border: 1px solid rgba(91,255,165,.35); border-radius: 18px; background: rgba(91,255,165,.06); }
+.press-box p { margin: 0; color: var(--ink); font-weight: 600; }
+.press-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 20px 0; }
+.press-gallery img { border-radius: 16px; border: 1px solid var(--line); }
+@media (max-width: 620px) { .press-gallery { grid-template-columns: repeat(2, 1fr); } }
+
 /* Alt bilgi */
 .footer { display: flex; justify-content: space-between; gap: 30px; padding: 34px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: .92rem; }
 .footer-links { display: flex; flex-wrap: wrap; gap: 16px; }

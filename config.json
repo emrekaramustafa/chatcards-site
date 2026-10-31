@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "config_version": 1,
+  "verdict_enabled": true,
+  "verdict_share_enabled": true,
+  "cta_strip_enabled": true,
+  "year_mode_enabled": true,
+  "iap_enabled": true
+}
