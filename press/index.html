@@ -23,7 +23,7 @@
 </head>
 <body>
 <!-- Basın sayfası (#38 SITE-12, SITE-13; metin 06-icerik-kiti.md §B4.4).
-     Gizlilik bilgi kartındaki liste docs/privacy-policy-v1.1.md ve
+     Gizlilik bilgi kartındaki liste docs/privacy-policy.md ve
      docs/store-submission.md ile aynı gün güncellenir. Kurucu alıntısı ve
      fotoğrafı Emre onaylayınca eklenir; o zamana kadar bölüm yok.
      Hız iddiası ({N} mesaj {S} saniyede) IK-V03 ölçümünden önce yazılmaz.
@@ -43,7 +43,7 @@
 <div class="table-wrap"><table>
 <tr><th>Platformlar</th><td>iPhone (iOS 15 ve üzeri; iPad sürümü yok) ve Android (7.0 ve üzeri)</td></tr>
 <tr><th>Geliştirici</th><td>Mek Mobile Tech · Emre Karamustafa, bağımsız geliştirici (Türkiye)</td></tr>
-<tr><th>Fiyat</th><td>İlk analiz ücretsiz, bütün kartlar açık. Premium Türkiye’de ₺50/ay ya da ₺300/yıl (aylık ₺25); ABD’de $2/$12. Uygun yeni abonelere mağaza üzerinden 3 gün ücretsiz deneme. Haftalık abonelik yok.</td></tr>
+<tr><th>Fiyat</th><td>İlk analiz ücretsiz. 3 sohbet 49,99 TL, Sınırsız 149,99 TL (ömür boyu), tek seferlik; abonelik ve ücretsiz deneme yok.</td></tr>
 <tr><th>Diller</th><td>Sohbet: Türkçe, İngilizce (Hindistan tarih biçimleri dahil), Portekizce, Hintçe. Arayüz: Türkçe ve İngilizce; 1.1 sürümüyle Portekizce (Brezilya) ve Hintçe.</td></tr>
 <tr><th>Öne çıkanlar</th><td>20’den fazla grup ödülü · iki kişilik “sohbeti kim taşıyor” hükmü (yedi ölçüt, duyguları ölçmez) · 1.1 ile “Grubunun 2026’sı” yıl özeti modu · Story boyutunda (1080×1920) kartlar</td></tr>
 <tr><th>İnceleme</th><td>iPhone için basın inceleme kodu e-postayla verilir. Android’de Google Play bağlantısı verilir.</td></tr>
@@ -54,21 +54,21 @@
 <li><strong>Cihazda kalır:</strong> sohbet dosyası, mesaj metinleri, katılımcı adları, telefon numaraları, analiz sonuçları ve kartlar.</li>
 <li><strong>Cihazdan çıkar (içerik taşımaz):</strong>
 anonim kullanım event’leri — ekran ve huni adımları, Mixpanel, AB veri bölgesi;
-abonelik doğrulaması — RevenueCat;
+satın alma doğrulaması — RevenueCat;
 Android’de mağaza yönlendirme bilgisi (Play Install Referrer kampanya kodları);
 iPhone’da Apple Ads atıf belirteci (RevenueCat üzerinden; reklam kimliği ve ATT yok);
 herkese açık yapılandırma dosyası isteği (<code>config.json</code>, kimlik içermez).
 Çökme raporu altyapısı (Sentry, AB, kişisel veri gönderimi kapalı) uygulamada hazırdır ama şu an kapalıdır.</li>
 <li><strong>Hiçbir event’e girmez:</strong> mesaj ya da katılımcı sayısı (aralık olarak bile), ilişki türü, sohbet ya da grup adı, kişi adı, dosya adı, telefon numarası.</li>
 <li><strong>Mixpanel event’lerinin tam listesi:</strong> App First Open, Open Page, Import Started, Analysis Completed, Analysis Failed, Share Started, Share Result, Free Unlock Consumed, Paywall Viewed, Purchase Result, Review Prompted. Alanlar yalnızca sabit değer listelerinden, kart adedinden ve evet/hayır bilgilerinden oluşur. Her event’e uygulama sürümü, platform, arayüz dili ve kurulum kaynağı eklenir.</li>
-<li><strong>RevenueCat’e gidenler:</strong> anonim uygulama kullanıcı kimliği, ürün kimliği, satın alma belirteci ya da işlem bilgisi, mağaza, abonelik durumu ve süresi; Mixpanel’in anonim kurulum kimliği (abonelik event’lerini aynı anonim kimlikle ölçmek için).</li>
+<li><strong>RevenueCat’e gidenler:</strong> anonim uygulama kullanıcı kimliği, ürün kimliği, satın alma belirteci ya da işlem bilgisi, mağaza, eski abonelikte abonelik durumu ve süresi; Mixpanel’in anonim kurulum kimliği (satın alma event’lerini aynı anonim kimlikle ölçmek için).</li>
 </ul>
 <p>Ayrıntılar ve alanların tek tek açıklaması: <a href="../privacy/">Gizlilik politikası</a>.</p>
 
 <h2>Basın SSS</h2>
 <ul>
 <li><strong>WhatsApp kurallarına aykırı mı?</strong> Hayır. Kullanıcının WhatsApp’ın kendi “Sohbeti dışa aktar” özelliğiyle oluşturduğu dosyayı okur; WhatsApp servisine ya da API’sine erişmez.</li>
-<li><strong>Neden abonelik?</strong> İlk analiz tamamen açık; bağımsız ve tek kişilik bir geliştirme. Haftalık plan yok.</li>
+<li><strong>Neden tek seferlik?</strong> İnsanlar yılda birkaç sohbet analiz ediyor; bunun için abonelik gereksiz. Bir kez ödenir, yenilenmez; unutulan abonelik derdi yok.</li>
 <li><strong>Neden yalnızca iPhone, iPad yok?</strong> Kartlar telefon ekranı ve Story boyutu için tasarlandı; ilk sürümler telefona odaklanıyor.</li>
 <li><strong>Meta ile ilişki?</strong> Yok. ChatCards bağımsız bir uygulamadır; WhatsApp logosu kullanılmaz.</li>
 </ul>
@@ -95,7 +95,7 @@ herkese açık yapılandırma dosyası isteği (<code>config.json</code>, kimlik
 <div class="table-wrap"><table>
 <tr><th>Platforms</th><td>iPhone (iOS 15 or later; no iPad version) and Android (7.0 or later)</td></tr>
 <tr><th>Developer</th><td>Mek Mobile Tech · Emre Karamustafa, independent developer (Türkiye)</td></tr>
-<tr><th>Price</th><td>First analysis free, every card open. Premium is ₺50/month or ₺300/year in Türkiye; $2/$12 in the US; local store prices elsewhere. Eligible new subscribers get a 3-day free trial from the store. No weekly plans.</td></tr>
+<tr><th>Price</th><td>First analysis free. 3 chats TRY 49.99, Unlimited TRY 149.99 (lifetime), one-time payments in Türkiye; local store prices elsewhere. No subscription and no free trial.</td></tr>
 <tr><th>Languages</th><td>Chats: English (including Indian date formats), Turkish, Portuguese, Hindi. Interface: English and Turkish; version 1.1 adds Portuguese (Brazil) and Hindi.</td></tr>
 <tr><th>Highlights</th><td>20+ group awards · one-on-one “who carries the conversation” verdict (seven measures, doesn’t measure feelings) · “Your group’s 2026” year-in-review mode from version 1.1 · Story-sized (1080×1920) cards</td></tr>
 <tr><th>Review access</th><td>iPhone press review codes are available by email. For Android we share the Google Play link.</td></tr>
@@ -106,21 +106,21 @@ herkese açık yapılandırma dosyası isteği (<code>config.json</code>, kimlik
 <li><strong>Stays on the device:</strong> the chat file, message text, participant names, phone numbers, analysis results and cards.</li>
 <li><strong>Leaves the device (no content):</strong>
 anonymous usage events — screens and funnel steps, Mixpanel, EU data region;
-subscription verification — RevenueCat;
+purchase verification — RevenueCat;
 on Android, store attribution (Play Install Referrer campaign codes);
 on iPhone, Apple’s Ads attribution token (via RevenueCat; no advertising ID, no ATT);
 a request for a public settings file (<code>config.json</code>, no identifiers).
 Crash reporting (Sentry, EU, sending of personal data off) is built in but currently switched off.</li>
 <li><strong>Never in any event:</strong> message or participant counts (not even as ranges), relationship type, chat or group name, person names, file names, phone numbers.</li>
 <li><strong>Complete list of Mixpanel events:</strong> App First Open, Open Page, Import Started, Analysis Completed, Analysis Failed, Share Started, Share Result, Free Unlock Consumed, Paywall Viewed, Purchase Result, Review Prompted. Properties are values from fixed lists, card counts and yes/no flags only. Every event also carries the app version, platform, interface language and install source.</li>
-<li><strong>Sent to RevenueCat:</strong> an anonymous app user ID, product ID, purchase token or transaction information, store, subscription status and expiry; Mixpanel’s anonymous installation ID (so subscription events can be measured under the same anonymous ID).</li>
+<li><strong>Sent to RevenueCat:</strong> an anonymous app user ID, product ID, purchase token or transaction information, store, and for earlier subscriptions the subscription status and expiry; Mixpanel’s anonymous installation ID (so purchase events can be measured under the same anonymous ID).</li>
 </ul>
 <p>Details and a field-by-field description: <a href="../privacy/#en">Privacy policy</a>.</p>
 
 <h2>Press FAQ</h2>
 <ul>
 <li><strong>Does it break WhatsApp’s rules?</strong> No. It reads the file the user creates with WhatsApp’s own “Export chat”; it doesn’t access the WhatsApp service or API.</li>
-<li><strong>Why a subscription?</strong> The first analysis is fully open; it’s an independent one-person project. No weekly plan.</li>
+<li><strong>Why one-time?</strong> People analyse a few chats a year, so a subscription doesn’t fit. You pay once and nothing renews, so there’s no forgotten subscription to worry about.</li>
 <li><strong>Why iPhone only, no iPad?</strong> The cards are designed for phone screens and Story size; the first versions focus on the phone.</li>
 <li><strong>Any relationship with Meta?</strong> None. ChatCards is independent; the WhatsApp logo is not used.</li>
 </ul>
